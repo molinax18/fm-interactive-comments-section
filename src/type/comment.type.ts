@@ -13,17 +13,6 @@ export interface Comment {
   replies: Reply[];
 }
 
-interface Reply {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
+type Reply = Omit<Comment, "replies"> & {
   replyingTo?: string;
-  user: {
-    image: {
-      png: string;
-      webp: string;
-    };
-    username: string;
-  };
-}
+};
