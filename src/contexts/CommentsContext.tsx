@@ -1,10 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
-import { commentReducer } from "../reducers/CommentsReducer";
-import { comments as INITIAL_STATE } from "../../data.json";
+import { commentReducer } from "@/reducers/CommentsReducer";
+import { comments as INITIAL_STATE } from "@/data.json";
 import type {
   CommentsContextProps,
   CommentsProviderProps,
-} from "../type/commentsContext.type";
+} from "@/type/commentsContext.type";
 
 const CommentsContext = createContext<CommentsContextProps | null>(null);
 

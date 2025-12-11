@@ -14,3 +14,9 @@
 
   --font-rubik: "Rubik", sans-serif;
 }
+
+@layer base {
+  body {
+    @apply font-rubik font-normal bg-grey-100;
+  }
+}
