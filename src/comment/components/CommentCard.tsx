@@ -1,4 +1,5 @@
-import type { Comment } from "@/type/comment.type";
+import type { Comment } from "@/comment/type/comment.type";
+import Button from "@/shared/components/Button";
 
 interface Props {
   data: Comment;
@@ -19,7 +20,7 @@ export default function CommentCard({ data }: Props) {
         <span className="font-semibold text-gray-800">{username}</span>
         <span>{createdAt}</span>
       </div>
-      <button className="row-start-3">Reply</button>
+      <Button>Reply</Button>
       <p className="row-start-2 col-span-full">{content}</p>
       <button className="row-start-3 col-start-11">
         Like button ({score})

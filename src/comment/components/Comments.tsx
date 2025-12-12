@@ -1,4 +1,4 @@
-import { useCommentsContext } from "@/contexts/CommentsContext";
+import { useCommentsContext } from "@/comment/contexts/CommentsContext";
 import CommentCard from "./CommentCard";
 
 export default function Comments() {

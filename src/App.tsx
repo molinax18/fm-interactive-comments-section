@@ -1,4 +1,4 @@
-import Comments from "./components/comment/Comments";
+import Comments from "@/comment/components/Comments";
 
 export default function App() {
   return (
