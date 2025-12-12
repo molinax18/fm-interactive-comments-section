@@ -20,7 +20,7 @@ export default function CommentCard({ data }: Props) {
         <span className="font-semibold text-gray-800">{username}</span>
         <span>{createdAt}</span>
       </div>
-      <Button>Reply</Button>
+      <Button className="row-start-3">Reply</Button>
       <p className="row-start-2 col-span-full">{content}</p>
       <button className="row-start-3 col-start-11">
         Like button ({score})
