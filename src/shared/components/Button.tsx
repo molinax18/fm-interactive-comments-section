@@ -1,12 +1,12 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { Variant } from "@/shared/types/variantColor.type";
+import type { ColorVariant } from "@/shared/types/variantColor.type";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  theme?: Variant;
+  theme?: ColorVariant;
 }
 
-export default function Button({ theme = Variant.Primary, ...props }: Props) {
+export default function Button({ theme = "primary", ...props }: Props) {
   return (
     <button {...props} data-theme={theme}>
       {props.children}

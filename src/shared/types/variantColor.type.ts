@@ -1,4 +1,1 @@
-export enum Variant {
-  Primary = "primary",
-  Danger = "danger",
-}
+export type ColorVariant = "primary" | "danger";
