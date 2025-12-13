@@ -1,5 +1,6 @@
 import type { Comment } from "@/comment/type/comment.type";
 import Button from "@/shared/components/Button";
+import LikeButton from "./LikeButton";
 
 interface Props {
   data: Comment;
@@ -20,11 +21,11 @@ export default function CommentCard({ data }: Props) {
         <span className="font-semibold text-gray-800">{username}</span>
         <span>{createdAt}</span>
       </div>
-      <Button className="row-start-3">Reply</Button>
+      <LikeButton likes={score} className="row-start-3 col-span-3 p-1" />
       <p className="row-start-2 col-span-full">{content}</p>
-      <button className="row-start-3 col-start-11">
-        Like button ({score})
-      </button>
+      <Button className="row-start-3 col-start-11 col-span-full font-semibold">
+        Reply
+      </Button>
     </article>
   );
 }

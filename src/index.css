@@ -20,11 +20,11 @@
     @apply font-rubik font-normal bg-grey-100;
   }
 
-  button[data-theme="primary"] {
+  [data-theme="primary"] {
     @apply text-purple-600;
   }
 
-  button[data-theme="danger"] {
+  [data-theme="danger"] {
     @apply text-pink-400;
   }
 }
