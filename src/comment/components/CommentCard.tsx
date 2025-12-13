@@ -22,7 +22,7 @@ export default function CommentCard({ data }: Props) {
         <span className="font-semibold text-gray-800">{username}</span>
         <span>{createdAt}</span>
       </div>
-      <LikeButton likes={score} className="row-start-3 col-span-3 p-1" />
+      <LikeButton likes={score} className="row-start-3 col-span-4 py-1 px-2" />
       <p className="row-start-2 col-span-full">{content}</p>
       <Button className="row-start-3 col-start-10 col-span-full flex gap-x-2 items-center font-semibold">
         <Reply />

@@ -1,4 +1,6 @@
 import type { ColorVariant } from "@/shared/types/variantColor.type";
+import Minus from "@/shared/components/svg/Minus";
+import Plus from "@/shared/components/svg/Plus";
 
 interface Props {
   theme?: ColorVariant;
@@ -20,9 +22,13 @@ export default function LikeButton({
       data-theme={theme}
       className={`flex justify-between rounded-sm bg-grey-100 ${className || ""}`}
     >
-      <button className="flex-initial w-4">+</button>
+      <button className="text-purple-200">
+        <Plus />
+      </button>
       <span className="font-semibold">{likes}</span>
-      <button className="flex-initial w-4">-</button>
+      <button className="text-purple-200">
+        <Minus />
+      </button>
     </div>
   );
 }
