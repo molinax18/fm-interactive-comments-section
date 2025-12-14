@@ -1,20 +1,22 @@
+import type { HTMLAttributes } from "react";
 import type { User } from "../type/comment.type";
 import Badge from "@/shared/components/Badge";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   user: User;
-  className?: string;
   isCurrentUser: boolean;
 }
 
-export default function UserProfile({ user, className, isCurrentUser }: Props) {
+export default function UserProfile({ user, isCurrentUser, className }: Props) {
   const { image, username } = user;
 
   return (
-    <div className={className || ""}>
+    <div className={`flex items-center gap-x-3 ${className || ""}`}>
       <img className="size-8" src={image.png} alt={username} />
+
       <span className="font-semibold text-gray-800">{username}</span>
-      {isCurrentUser && <Badge>you</Badge>}
+
+      {isCurrentUser && <Badge className="bg-purple-600 text-white">you</Badge>}
     </div>
   );
 }

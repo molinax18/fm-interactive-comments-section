@@ -19,16 +19,4 @@
   body {
     @apply font-rubik font-normal bg-grey-100;
   }
-
-  [data-theme="primary"] {
-    @apply text-purple-600;
-  }
-
-  [data-theme="danger"] {
-    @apply text-pink-400;
-  }
-
-  span[data-theme="primary"] {
-    @apply bg-purple-600 text-white;
-  }
 }
