@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 import { Reply, Delete, Edit } from "@/shared/components/svg";
-import Button from "@/shared/components/Button";
+import { motion } from "motion/react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   isCurrentUser: boolean;
@@ -9,7 +9,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onDelete?: () => void;
 }
 
-const buttonStyles = "flex gap-x-2 items-center font-semibold";
+const buttonStyles =
+  "flex gap-x-2 items-center font-semibold hover:cursor-pointer";
 
 export default function ActionControl({
   isCurrentUser,
@@ -22,27 +23,33 @@ export default function ActionControl({
     <div className={className || ""}>
       {isCurrentUser ? (
         <>
-          <Button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             className={`${buttonStyles} text-pink-400`}
             onClick={onDelete}
           >
             <Delete />
             Delete
-          </Button>
+          </motion.button>
 
-          <Button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             className={`${buttonStyles} text-purple-600`}
             onClick={onEdit}
           >
             <Edit />
             Edit
-          </Button>
+          </motion.button>
         </>
       ) : (
-        <Button className={`${buttonStyles} text-purple-600`} onClick={onReply}>
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          className={`${buttonStyles} text-purple-600`}
+          onClick={onReply}
+        >
           <Reply />
           Reply
-        </Button>
+        </motion.button>
       )}
     </div>
   );

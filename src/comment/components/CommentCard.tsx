@@ -38,7 +38,7 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
 
       <ScoreControl
         score={score}
-        className="row-start-3 col-span-4 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-3 md:flex-col md:items-center md:py-4"
+        className="row-start-3 col-span-4 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-3 md:flex-col md:items-center md:py-3"
       />
 
       <p className="row-start-2 col-span-full md:col-start-2">
