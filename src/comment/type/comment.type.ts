@@ -15,6 +15,6 @@ export interface Comment {
   replies: Reply[];
 }
 
-export type Reply = Comment & {
+export type Reply = Omit<Comment, "replies"> & {
   replyingTo?: string;
 };

@@ -1,7 +1,6 @@
 import type { HTMLAttributes } from "react";
+import { Minus, Plus } from "@/shared/components/svg/";
 import Button from "@/shared/components/Button";
-import Minus from "@/shared/components/svg/Minus";
-import Plus from "@/shared/components/svg/Plus";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   score: number;

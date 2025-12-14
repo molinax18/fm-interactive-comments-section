@@ -1,9 +1,8 @@
 import type { HTMLAttributes } from "react";
 import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
 import UserProfile from "./UserProfile";
-import Button from "@/shared/components/Button";
-import Reply from "@/shared/components/svg/Reply";
 import ScoreControl from "./ScoreControl";
+import ActionControl from "./ActionControl";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data: Comment | TReply;
@@ -41,10 +40,10 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
 
       <p className="row-start-2 col-span-full">{renderMessage()}</p>
 
-      <Button className="row-start-3 col-start-10 col-span-full flex gap-x-2 items-center font-semibold text-purple-600">
-        <Reply />
-        Reply
-      </Button>
+      <ActionControl
+        isCurrentUser={isCurrentUser}
+        className={`${isCurrentUser ? "flex gap-x-4 col-start-8" : "col-start-10"} row-start-3 col-span-full ml-auto`}
+      />
     </article>
   );
 }
