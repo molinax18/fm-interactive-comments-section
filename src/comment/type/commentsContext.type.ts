@@ -1,9 +1,14 @@
 import type { ActionDispatch, ReactNode } from "react";
-import type { Comment } from "./comment.type";
+import type { Comment, User } from "./comment.type";
+
+export interface State {
+  currentUser: User;
+  comments: Comment[];
+}
 
 export interface CommentsContextProps {
-  state: Comment[];
-  dispatch: ActionDispatch<[action: Comment[]]>;
+  state: State;
+  dispatch: ActionDispatch<[action: State]>;
 }
 
 export interface CommentsProviderProps {

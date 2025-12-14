@@ -1,3 +1,3 @@
-import type { Comment } from "@/comment/type/comment.type";
+import type { State } from "../type/commentsContext.type";
 
-export const commentReducer = (state: Comment[]) => state;
+export const commentReducer = (state: State) => state;

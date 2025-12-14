@@ -6,8 +6,12 @@ export default function Comments() {
 
   return (
     <section className="flex flex-col gap-y-4 w-[90%] max-w-3xl mx-auto py-4">
-      {state.map((c) => (
-        <CommentCard key={c.id} data={c} />
+      {state.comments.map((c) => (
+        <CommentCard
+          key={c.id}
+          data={c}
+          isCurrentUser={state.currentUser.username === c.user.username}
+        />
       ))}
     </section>
   );
