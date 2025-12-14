@@ -16,7 +16,11 @@ export default function UserProfile({ user, isCurrentUser, className }: Props) {
 
       <span className="font-semibold text-gray-800">{username}</span>
 
-      {isCurrentUser && <Badge className="bg-purple-600 text-white">you</Badge>}
+      {isCurrentUser && (
+        <Badge className="bg-purple-600 text-white text-sm px-3 py-0.5">
+          you
+        </Badge>
+      )}
     </div>
   );
 }
