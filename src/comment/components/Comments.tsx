@@ -1,6 +1,7 @@
 import { useCommentsContext } from "@/comment/contexts/CommentsContext";
 import { Fragment } from "react/jsx-runtime";
 import CommentCard from "./CommentCard";
+import AddComment from "./AddComment";
 
 export default function Comments() {
   const { state } = useCommentsContext();
@@ -26,6 +27,8 @@ export default function Comments() {
           </Fragment>
         );
       })}
+
+      <AddComment currentUser={state.currentUser} />
     </section>
   );
 }
