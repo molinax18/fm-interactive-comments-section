@@ -1,5 +1,7 @@
 import type { HTMLAttributes } from "react";
 import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
+import { useCommentsContext } from "../contexts/CommentsContext";
+import { CommentActionEnum } from "../type/commentActions.type";
 import UserProfile from "./UserProfile";
 import ScoreControl from "./ScoreControl";
 import ActionControl from "./ActionControl";
@@ -10,7 +12,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function CommentCard({ data, isCurrentUser, className }: Props) {
-  const { content, createdAt, score, user } = data;
+  const { dispatch } = useCommentsContext();
+  const { content, createdAt, score, user, id } = data;
   const renderMessage = () => {
     if ("replyingTo" in data) {
       return (
@@ -39,6 +42,12 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
       <ScoreControl
         score={score}
         className="row-start-3 col-span-4 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-3 md:flex-col md:items-center md:py-3"
+        onIncrement={() =>
+          dispatch({ type: CommentActionEnum.INCREMENT_SCORE, payload: id })
+        }
+        onDecrement={() =>
+          dispatch({ type: CommentActionEnum.DECREMENT_SCORE, payload: id })
+        }
       />
 
       <p className="row-start-2 col-span-full md:col-start-2">
