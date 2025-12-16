@@ -1,8 +1,9 @@
-import type { CommentsState } from "../type/commentsContext.type";
 import {
   CommentActionEnum,
   type CommentActionType,
 } from "../type/commentActions.type";
+import type { CommentsState } from "../type/commentsContext.type";
+import { updateCommentScore } from "../utils/commentReducer.utils";
 
 export const commentReducer = (
   state: CommentsState,
@@ -10,23 +11,9 @@ export const commentReducer = (
 ): CommentsState => {
   switch (action.type) {
     case CommentActionEnum.INCREMENT_SCORE: {
-      const CommentsUpdated = state.comments.map((c) => {
-        let newCom = c;
-
-        if (c.replies.length > 0) {
-          const replies = c.replies.map((r) =>
-            r.id === action.payload ? { ...r, score: r.score + 1 } : r
-          );
-
-          newCom = { ...newCom, replies };
-        }
-
-        if (c.id === action.payload) {
-          newCom = { ...newCom, score: newCom.score + 1 };
-        }
-
-        return newCom;
-      });
+      const CommentsUpdated = state.comments.map((c) =>
+        updateCommentScore(c, action.payload, 1)
+      );
 
       return {
         ...state,
@@ -35,28 +22,9 @@ export const commentReducer = (
     }
 
     case CommentActionEnum.DECREMENT_SCORE: {
-      const CommentsUpdated = state.comments.map((c) => {
-        let newCom = c;
-
-        if (c.replies.length > 0) {
-          const replies = c.replies.map((r) => {
-            if (r.id !== action.payload) return r;
-
-            return r.score > 0 ? { ...r, score: r.score - 1 } : r;
-          });
-
-          newCom = { ...newCom, replies };
-        }
-
-        if (c.id === action.payload) {
-          newCom = {
-            ...newCom,
-            score: newCom.score > 0 ? newCom.score - 1 : newCom.score,
-          };
-        }
-
-        return newCom;
-      });
+      const CommentsUpdated = state.comments.map((c) =>
+        updateCommentScore(c, action.payload, -1)
+      );
 
       return {
         ...state,
