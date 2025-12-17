@@ -6,7 +6,7 @@ function updateScore(score: number, delta: 1 | -1): number {
 
 export function updateCommentScore(
   comment: Comment,
-  id: number,
+  id: string,
   delta: 1 | -1
 ): Comment {
   return {
