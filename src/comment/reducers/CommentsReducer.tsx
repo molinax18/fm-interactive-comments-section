@@ -1,3 +1,4 @@
+import type { Comment } from "../type/comment.type";
 import {
   CommentActionEnum,
   type CommentActionType,
@@ -46,6 +47,22 @@ export const commentReducer = (
       return {
         ...state,
         comments: newComments,
+      };
+    }
+
+    case CommentActionEnum.ADD_COMMENT: {
+      const newComment: Comment = {
+        id: crypto.randomUUID(),
+        content: action.payload,
+        createdAt: "now",
+        replies: [],
+        score: 0,
+        user: { ...state.currentUser },
+      };
+
+      return {
+        ...state,
+        comments: [...state.comments, newComment],
       };
     }
 

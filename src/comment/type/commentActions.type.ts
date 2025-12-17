@@ -10,7 +10,7 @@ export enum CommentActionEnum {
 export type CommentActionType =
   | { type: CommentActionEnum.INCREMENT_SCORE; payload: number }
   | { type: CommentActionEnum.DECREMENT_SCORE; payload: number }
-  | { type: CommentActionEnum.ADD_COMMENT }
-  | { type: CommentActionEnum.REPLY_COMMENT; payload: number }
-  | { type: CommentActionEnum.EDIT_COMMENT; payload: number }
-  | { type: CommentActionEnum.DELETE_COMMENT; payload: number };
+  | { type: CommentActionEnum.ADD_COMMENT; payload: string }
+  | { type: CommentActionEnum.REPLY_COMMENT; payload: string }
+  | { type: CommentActionEnum.EDIT_COMMENT; payload: string }
+  | { type: CommentActionEnum.DELETE_COMMENT; payload: string };
