@@ -32,6 +32,23 @@ export const commentReducer = (
       };
     }
 
+    case CommentActionEnum.DELETE_COMMENT: {
+      const newComments = state.comments
+        .filter((c) => c.id !== action.payload)
+        .map((c) => ({
+          ...c,
+          replies:
+            c.replies.length > 0
+              ? c.replies.filter((r) => r.id !== action.payload)
+              : c.replies,
+        }));
+
+      return {
+        ...state,
+        comments: newComments,
+      };
+    }
+
     default:
       return state;
   }

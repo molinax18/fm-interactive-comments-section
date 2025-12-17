@@ -1,6 +1,9 @@
 import type { HTMLAttributes } from "react";
+import { useModal } from "@/shared/hooks/useModal";
 import { Reply, Delete, Edit } from "@/shared/components/svg";
-import { motion } from "motion/react";
+import Modal from "@/shared/components/Modal";
+import Button from "@/shared/components/Button";
+import MotionButtonTap from "@/shared/components/MotionButtonTap";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   isCurrentUser: boolean;
@@ -19,38 +22,68 @@ export default function ActionControl({
   onEdit,
   onDelete,
 }: Props) {
-  return (
-    <div className={className || ""}>
-      {isCurrentUser ? (
-        <>
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            className={`${buttonStyles} text-pink-400`}
-            onClick={onDelete}
-          >
-            <Delete />
-            Delete
-          </motion.button>
+  const { openModal, onClose, onOpen } = useModal();
 
-          <motion.button
-            whileTap={{ scale: 0.9 }}
+  return (
+    <>
+      <div className={className || ""}>
+        {isCurrentUser ? (
+          <>
+            <MotionButtonTap
+              className={`${buttonStyles} text-pink-400`}
+              onClick={onOpen}
+            >
+              <Delete />
+              Delete
+            </MotionButtonTap>
+
+            <MotionButtonTap
+              className={`${buttonStyles} text-purple-600`}
+              onClick={onEdit}
+            >
+              <Edit />
+              Edit
+            </MotionButtonTap>
+          </>
+        ) : (
+          <MotionButtonTap
             className={`${buttonStyles} text-purple-600`}
-            onClick={onEdit}
+            onClick={onReply}
           >
-            <Edit />
-            Edit
-          </motion.button>
-        </>
-      ) : (
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          className={`${buttonStyles} text-purple-600`}
-          onClick={onReply}
-        >
-          <Reply />
-          Reply
-        </motion.button>
+            <Reply />
+            Reply
+          </MotionButtonTap>
+        )}
+      </div>
+
+      {openModal && (
+        <Modal className="flex flex-col gap-y-4 max-w-[36ch]">
+          <h4 className="font-semibold text-grey-800 text-xl">
+            Delete comment
+          </h4>
+
+          <p className="text-grey-500">
+            Are you sure you want to delete this comment? This will remove the
+            comment and can&apos;t be undone.
+          </p>
+
+          <div className="flex gap-x-4">
+            <Button
+              className="grow transition bg-grey-500 text-white uppercase py-2 px-3 rounded-lg hover:cursor-pointer hover:bg-grey-500/90"
+              onClick={onClose}
+            >
+              No, cancel
+            </Button>
+
+            <Button
+              className="grow transition bg-pink-400 text-white uppercase py-2 px-3 rounded-lg hover:cursor-pointer hover:bg-pink-400/90"
+              onClick={onDelete}
+            >
+              Yes, delete
+            </Button>
+          </div>
+        </Modal>
       )}
-    </div>
+    </>
   );
 }
