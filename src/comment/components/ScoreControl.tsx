@@ -8,7 +8,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onDecrement?: () => void;
 }
 
-const buttonStyles = "not-disabled:cursor-pointer p-1.5";
+const buttonStyles =
+  "p-1.5 not-disabled:cursor-pointer disabled:text-purple-200 text-purple-600";
 
 export default function ScoreControl({
   score,
@@ -22,7 +23,7 @@ export default function ScoreControl({
     >
       <motion.button
         whileTap={{ scale: 0.7 }}
-        className={`text-purple-200 ${buttonStyles}`}
+        className={buttonStyles}
         onClick={onIncrement}
       >
         <Plus />
@@ -32,7 +33,7 @@ export default function ScoreControl({
 
       <motion.button
         whileTap={{ scale: 0.7 }}
-        className={`text-purple-200 ${buttonStyles}`}
+        className={buttonStyles}
         disabled={score === 0}
         onClick={onDecrement}
       >

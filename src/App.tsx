@@ -1,9 +1,12 @@
+import { CommentsProvider } from "@/comment/contexts/CommentsContext.tsx";
 import Comments from "@/comment/components/Comments";
 
 export default function App() {
   return (
     <main>
-      <Comments />
+      <CommentsProvider>
+        <Comments />
+      </CommentsProvider>
     </main>
   );
 }
