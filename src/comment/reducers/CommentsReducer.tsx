@@ -54,7 +54,7 @@ export const commentReducer = (
       const newComment: Comment = {
         id: crypto.randomUUID(),
         content: action.payload,
-        createdAt: "now",
+        createdAt: new Date(Date.now()).toISOString(),
         replies: [],
         score: 0,
         user: { ...state.currentUser },

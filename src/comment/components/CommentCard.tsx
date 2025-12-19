@@ -1,6 +1,7 @@
 import { useCommentsContext } from "../contexts/CommentsContext";
 import { CommentActionEnum } from "../type/commentActions.type";
 import { useMessageCard } from "../hooks/useMessageCard";
+import { formatTimeComment } from "../utils/commentDate";
 import type { HTMLAttributes } from "react";
 import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
 import UserProfile from "./UserProfile";
@@ -26,12 +27,12 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
         <header className="col-span-full flex items-center gap-x-3 md:row-start-1 md:col-start-2 md:col-span-8">
           <UserProfile user={user} isCurrentUser={isCurrentUser} />
 
-          <time>{createdAt}</time>
+          <time dateTime={createdAt}>{formatTimeComment(createdAt)}</time>
         </header>
 
         <ScoreControl
           score={score}
-          className="row-start-3 col-span-4 min-h-30 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-3 md:flex-col md:items-center md:py-3"
+          className="row-start-3 col-span-4 md:min-h-30 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-3 md:flex-col md:items-center md:py-3"
           onIncrement={() =>
             dispatch({ type: CommentActionEnum.INCREMENT_SCORE, payload: id })
           }

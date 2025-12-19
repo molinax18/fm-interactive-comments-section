@@ -26,9 +26,9 @@ export function editComment(
 ): Comment {
   return {
     ...comment,
-    content: comment.id === id ? content : comment.content,
+    content: comment.id === id ? `${content} (edited)` : comment.content,
     replies: comment.replies.map((r) =>
-      r.id === id ? { ...r, content: content } : r
+      r.id === id ? { ...r, content: `${content} (edited)` } : r
     ),
   };
 }

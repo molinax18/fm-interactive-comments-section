@@ -38,8 +38,11 @@ export default function CommentMessageControl({
   };
 
   return hasEdited ? (
-    <form onSubmit={onSubmit} className={`flex gap-x-2 ${className || ""}`}>
-      <fieldset className="flex-initial w-[80%]">
+    <form
+      onSubmit={onSubmit}
+      className={`flex flex-col gap-y-1 md:gap-x-3 md:flex-row ${className || ""}`}
+    >
+      <fieldset className="md:flex-initial md:w-[80%]">
         <textarea
           className="w-full text-area"
           placeholder="Add a comment..."
@@ -50,7 +53,7 @@ export default function CommentMessageControl({
 
       <Button
         type="submit"
-        className="col-start-8 grow self-start p-3 btn-fill"
+        className="col-start-8 grow btn-fill p-2 md:p-3 md:self-start"
         disabled={!!!message}
       >
         Update
