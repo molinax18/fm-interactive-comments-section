@@ -20,3 +20,13 @@
     @apply font-rubik font-normal bg-grey-100;
   }
 }
+
+@layer components {
+  .text-area {
+    @apply p-2 border border-grey-100 outline-purple-600 resize-none;
+  }
+
+  .btn-fill {
+    @apply transition rounded-lg uppercase bg-purple-600 text-white hover:opacity-90 focus:opacity-90 not-disabled:cursor-pointer disabled:bg-grey-500 disabled:hover:opacity-100 disabled:focus:opacity-100;
+  }
+}

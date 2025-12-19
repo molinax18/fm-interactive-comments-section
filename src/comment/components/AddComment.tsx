@@ -1,6 +1,7 @@
-import { useState, type FormEvent } from "react";
 import { useCommentsContext } from "../contexts/CommentsContext";
 import { CommentActionEnum } from "../type/commentActions.type";
+import { useMessageComment } from "../hooks/useMessageComment";
+import type { FormEvent } from "react";
 import type { User } from "../type/comment.type";
 import Button from "@/shared/components/Button";
 
@@ -10,7 +11,7 @@ interface Props {
 
 export default function AddComment({ currentUser }: Props) {
   const { dispatch } = useCommentsContext();
-  const [message, setMessage] = useState("");
+  const { message, setMessage, onChange } = useMessageComment();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,11 +20,8 @@ export default function AddComment({ currentUser }: Props) {
     setMessage("");
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setMessage(event.target.value);
-
   return (
-    <div className="grid grid-cols-6 gap-2 bg-white rounded-sm p-3 md:p-4 md:grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] md:gap-4">
+    <article className="grid grid-cols-6 gap-2 bg-white rounded-sm p-3 md:p-4 md:grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] md:gap-4">
       <img
         src={currentUser.image.png}
         alt={currentUser.username}
@@ -37,9 +35,7 @@ export default function AddComment({ currentUser }: Props) {
       >
         <fieldset>
           <textarea
-            name="message"
-            id="message"
-            className="h-20 p-2 w-full border border-grey-100 outline-purple-600 resize-none"
+            className="h-20 w-full text-area"
             placeholder="Add a comment..."
             value={message}
             onChange={onChange}
@@ -48,12 +44,12 @@ export default function AddComment({ currentUser }: Props) {
       </form>
 
       <Button
-        className="col-start-5 col-span-full p-3 transition rounded-lg uppercase bg-purple-600 text-white hover:opacity-90 focus:opacity-90 not-disabled:cursor-pointer disabled:bg-grey-500 disabled:hover:opacity-100 disabled:focus:opacity-100 md:row-start-1 md:self-start md:col-start-6"
+        className="col-start-5 col-span-full p-3 md:row-start-1 md:self-start btn-fill md:col-start-6"
         form="sendMessage"
         disabled={!!!message}
       >
         Send
       </Button>
-    </div>
+    </article>
   );
 }

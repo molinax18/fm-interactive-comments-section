@@ -12,5 +12,11 @@ export type CommentActionType =
   | { type: CommentActionEnum.DECREMENT_SCORE; payload: string }
   | { type: CommentActionEnum.ADD_COMMENT; payload: string }
   | { type: CommentActionEnum.REPLY_COMMENT; payload: string }
-  | { type: CommentActionEnum.EDIT_COMMENT; payload: string }
+  | {
+      type: CommentActionEnum.EDIT_COMMENT;
+      payload: {
+        id: string;
+        content: string;
+      };
+    }
   | { type: CommentActionEnum.DELETE_COMMENT; payload: string };

@@ -1,10 +1,10 @@
-import type { Comment } from "../type/comment.type";
+import { updateCommentScore, editComment } from "../utils/commentReducer.utils";
 import {
   CommentActionEnum,
   type CommentActionType,
 } from "../type/commentActions.type";
+import type { Comment } from "../type/comment.type";
 import type { CommentsState } from "../type/commentsContext.type";
-import { updateCommentScore } from "../utils/commentReducer.utils";
 
 export const commentReducer = (
   state: CommentsState,
@@ -12,24 +12,24 @@ export const commentReducer = (
 ): CommentsState => {
   switch (action.type) {
     case CommentActionEnum.INCREMENT_SCORE: {
-      const CommentsUpdated = state.comments.map((c) =>
+      const commentsUpdated = state.comments.map((c) =>
         updateCommentScore(c, action.payload, 1)
       );
 
       return {
         ...state,
-        comments: CommentsUpdated,
+        comments: commentsUpdated,
       };
     }
 
     case CommentActionEnum.DECREMENT_SCORE: {
-      const CommentsUpdated = state.comments.map((c) =>
+      const commentsUpdated = state.comments.map((c) =>
         updateCommentScore(c, action.payload, -1)
       );
 
       return {
         ...state,
-        comments: CommentsUpdated,
+        comments: commentsUpdated,
       };
     }
 
@@ -63,6 +63,18 @@ export const commentReducer = (
       return {
         ...state,
         comments: [...state.comments, newComment],
+      };
+    }
+
+    case CommentActionEnum.EDIT_COMMENT: {
+      const { id, content } = action.payload;
+      const commentsUpdated = state.comments.map((c) =>
+        editComment(c, id, content)
+      );
+
+      return {
+        ...state,
+        comments: commentsUpdated,
       };
     }
 

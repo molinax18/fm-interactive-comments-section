@@ -18,3 +18,17 @@ export function updateCommentScore(
     ),
   };
 }
+
+export function editComment(
+  comment: Comment,
+  id: string,
+  content: string
+): Comment {
+  return {
+    ...comment,
+    content: comment.id === id ? content : comment.content,
+    replies: comment.replies.map((r) =>
+      r.id === id ? { ...r, content: content } : r
+    ),
+  };
+}

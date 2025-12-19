@@ -1,10 +1,12 @@
-import type { HTMLAttributes } from "react";
-import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
 import { useCommentsContext } from "../contexts/CommentsContext";
 import { CommentActionEnum } from "../type/commentActions.type";
+import { useMessageCard } from "../hooks/useMessageCard";
+import type { HTMLAttributes } from "react";
+import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
 import UserProfile from "./UserProfile";
 import ScoreControl from "./ScoreControl";
 import ActionControl from "./ActionControl";
+import CommentMessageControl from "./CommentMessageControl";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data: Comment | TReply;
@@ -13,26 +15,13 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default function CommentCard({ data, isCurrentUser, className }: Props) {
   const { dispatch } = useCommentsContext();
-  const { content, createdAt, score, user, id } = data;
-  const renderMessage = () => {
-    if ("replyingTo" in data) {
-      return (
-        <>
-          <span className="font-semibold text-purple-600">
-            @{data.replyingTo}
-          </span>{" "}
-          {content}
-        </>
-      );
-    }
-
-    return content;
-  };
+  const { createdAt, score, user, id } = data;
+  const { editComment, hasEdited } = useMessageCard(data);
 
   return (
     <>
       <article
-        className={`grid grid-cols-12 gap-y-3 p-3 rounded-md bg-white text-grey-500 md:gap-3 md:p-4 ${className || ""}`}
+        className={`grid grid-cols-12 gap-y-3 p-3 rounded-md bg-white text-grey-500 md:gap-x-3 md:p-4 ${className || ""}`}
       >
         <header className="col-span-full flex items-center gap-x-3 md:row-start-1 md:col-start-2 md:col-span-8">
           <UserProfile user={user} isCurrentUser={isCurrentUser} />
@@ -51,9 +40,12 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
           }
         />
 
-        <p className="row-start-2 col-span-full md:col-start-2">
-          {renderMessage()}
-        </p>
+        <CommentMessageControl
+          data={data}
+          hasEdited={hasEdited}
+          editComment={editComment}
+          className="row-start-2 col-span-full md:col-start-2"
+        />
 
         <ActionControl
           isCurrentUser={isCurrentUser}
@@ -61,6 +53,7 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
           onDelete={() =>
             dispatch({ type: CommentActionEnum.DELETE_COMMENT, payload: id })
           }
+          onEdit={editComment}
         />
       </article>
     </>
