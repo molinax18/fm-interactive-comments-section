@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import type { User } from "../type/comment.type";
+import type { User } from "@/comment/type/comment.type";
 import Badge from "@/shared/components/Badge";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {

@@ -1,4 +1,4 @@
-import type { Comment } from "../type/comment.type";
+import type { Comment } from "@/comment/type/comment.type";
 
 function updateScore(score: number, delta: 1 | -1): number {
   return delta === -1 ? Math.max(0, score - 1) : score + 1;

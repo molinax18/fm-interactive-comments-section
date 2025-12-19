@@ -1,8 +1,8 @@
-import { useCommentsContext } from "../contexts/CommentsContext";
-import { CommentActionEnum } from "../type/commentActions.type";
-import { useMessageComment } from "../hooks/useMessageComment";
+import { useCommentsContext } from "@/comment/contexts/CommentsContext";
+import { useMessageComment } from "@/comment/hooks/useMessageComment";
+import { CommentActionEnum } from "@/comment/type/commentActions.type";
 import type { FormEvent } from "react";
-import type { User } from "../type/comment.type";
+import type { User } from "@/comment/type/comment.type";
 import Button from "@/shared/components/Button";
 
 interface Props {

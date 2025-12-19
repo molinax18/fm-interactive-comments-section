@@ -6,7 +6,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export default function Modal({ className, ...props }: Props) {
+export default function Modal({ ...props }: Props) {
   return createPortal(
     <motion.div
       initial={{ opacity: 0.5 }}
@@ -14,7 +14,7 @@ export default function Modal({ className, ...props }: Props) {
       className="fixed inset-0 grid place-items-center bg-black/50"
     >
       <div
-        className={`bg-white w-[90%] p-4 rounded-lg ${className || ""}`}
+        className={`bg-white w-[90%] p-4 rounded-lg ${props.className || ""}`}
         role="dialog"
         aria-modal="true"
         {...props}

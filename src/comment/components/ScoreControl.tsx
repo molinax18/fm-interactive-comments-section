@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
-import { motion } from "motion/react";
-import { Minus, Plus } from "@/shared/components/svg/";
+import { Minus, Plus } from "@/shared/components/svg";
+import MotionButtonTap from "@/shared/components/MotionButtonTap";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   score: number;
@@ -21,24 +21,24 @@ export default function ScoreControl({
     <div
       className={`flex justify-between rounded-sm bg-grey-100 py-1 px-2 ${className || ""}`}
     >
-      <motion.button
+      <MotionButtonTap
         whileTap={{ scale: 0.7 }}
         className={buttonStyles}
         onClick={onIncrement}
       >
         <Plus />
-      </motion.button>
+      </MotionButtonTap>
 
       <span className="font-semibold text-purple-600">{score}</span>
 
-      <motion.button
+      <MotionButtonTap
         whileTap={{ scale: 0.7 }}
         className={buttonStyles}
         disabled={score === 0}
         onClick={onDecrement}
       >
         <Minus />
-      </motion.button>
+      </MotionButtonTap>
     </div>
   );
 }

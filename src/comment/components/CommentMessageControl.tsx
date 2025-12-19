@@ -1,16 +1,15 @@
-import { useCommentsContext } from "../contexts/CommentsContext";
-import { useMessageComment } from "../hooks/useMessageComment";
-import { useMessageCard } from "../hooks/useMessageCard";
-import { CommentActionEnum } from "../type/commentActions.type";
-import type { Comment, Reply } from "../type/comment.type";
-import type { FormEvent } from "react";
+import { useCommentsContext } from "@/comment/contexts/CommentsContext";
+import { useMessageComment } from "@/comment/hooks/useMessageComment";
+import { useMessageCard } from "@/comment/hooks/useMessageCard";
+import { CommentActionEnum } from "@/comment/type/commentActions.type";
+import type { Comment, Reply } from "@/comment/type/comment.type";
+import type { FormEvent, HTMLAttributes } from "react";
 import Button from "@/shared/components/Button";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLFormElement> {
   hasEdited: boolean;
   editComment: () => void;
   data: Comment | Reply;
-  className?: string;
 }
 
 export default function CommentMessageControl({

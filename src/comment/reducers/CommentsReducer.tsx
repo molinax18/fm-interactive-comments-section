@@ -1,10 +1,13 @@
-import { updateCommentScore, editComment } from "../utils/commentReducer.utils";
+import {
+  updateCommentScore,
+  editComment,
+} from "@/comment/utils/commentReducer.utils";
 import {
   CommentActionEnum,
   type CommentActionType,
-} from "../type/commentActions.type";
-import type { Comment } from "../type/comment.type";
-import type { CommentsState } from "../type/commentsContext.type";
+} from "@/comment/type/commentActions.type";
+import type { Comment } from "@/comment/type/comment.type";
+import type { CommentsState } from "@/comment/type/commentsContext.type";
 
 export const commentReducer = (
   state: CommentsState,

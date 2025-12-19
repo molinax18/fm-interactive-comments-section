@@ -1,9 +1,9 @@
-import { useCommentsContext } from "../contexts/CommentsContext";
-import { CommentActionEnum } from "../type/commentActions.type";
-import { useMessageCard } from "../hooks/useMessageCard";
-import { formatTimeComment } from "../utils/commentDate";
-import type { HTMLAttributes } from "react";
+import { useCommentsContext } from "@/comment/contexts/CommentsContext";
+import { CommentActionEnum } from "@/comment/type/commentActions.type";
+import { useMessageCard } from "@/comment/hooks/useMessageCard";
+import { formatTimeComment } from "@/comment/utils/commentDate";
 import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
+import type { HTMLAttributes } from "react";
 import UserProfile from "./UserProfile";
 import ScoreControl from "./ScoreControl";
 import ActionControl from "./ActionControl";
@@ -16,8 +16,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export default function CommentCard({ data, isCurrentUser, className }: Props) {
   const { dispatch } = useCommentsContext();
-  const { createdAt, score, user, id } = data;
   const { editComment, hasEdited } = useMessageCard(data);
+  const { createdAt, score, user, id } = data;
 
   return (
     <>

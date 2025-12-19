@@ -1,21 +1,15 @@
 import { motion, type HTMLMotionProps } from "framer-motion";
 
-interface MotionButtonTapProps extends HTMLMotionProps<"button"> {
-  className?: string;
-}
-
 export default function MotionButtonTap({
-  className,
-  children,
   ...props
-}: MotionButtonTapProps) {
+}: HTMLMotionProps<"button">) {
   return (
     <motion.button
       whileTap={{ scale: 0.9 }}
-      className={className || ""}
+      className={props.className || ""}
       {...props}
     >
-      {children}
+      {props.children}
     </motion.button>
   );
 }

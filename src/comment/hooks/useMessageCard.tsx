@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Comment, Reply } from "../type/comment.type";
+import type { Comment, Reply } from "@/comment/type/comment.type";
 
 export function useMessageCard(data: Comment | Reply) {
   const [hasEdited, setHasEdited] = useState(false);
