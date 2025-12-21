@@ -1,6 +1,7 @@
 import {
   updateCommentScore,
   editComment,
+  replyComment,
 } from "@/comment/utils/commentReducer.utils";
 import {
   CommentActionEnum,
@@ -81,7 +82,16 @@ export const commentReducer = (
       };
     }
 
-    default:
-      return state;
+    case CommentActionEnum.REPLY_COMMENT: {
+      const { idToReply, content } = action.payload;
+      const commentsUpdated = state.comments.map((c) =>
+        replyComment(c, idToReply, content, state.currentUser)
+      );
+
+      return {
+        ...state,
+        comments: commentsUpdated,
+      };
+    }
   }
 };

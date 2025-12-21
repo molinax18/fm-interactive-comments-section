@@ -1,25 +1,20 @@
-import { useCommentsContext } from "@/comment/contexts/CommentsContext";
-import { useMessageComment } from "@/comment/hooks/useMessageComment";
-import { CommentActionEnum } from "@/comment/type/commentActions.type";
-import type { FormEvent } from "react";
 import type { User } from "@/comment/type/comment.type";
+import type { ChangeEvent, FormEvent } from "react";
 import Button from "@/shared/components/Button";
 
 interface Props {
   currentUser: User;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  message: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export default function AddComment({ currentUser }: Props) {
-  const { dispatch } = useCommentsContext();
-  const { message, setMessage, onChange } = useMessageComment();
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch({ type: CommentActionEnum.ADD_COMMENT, payload: message });
-    setMessage("");
-  };
-
+export default function AddComment({
+  currentUser,
+  onSubmit,
+  message,
+  onChange,
+}: Props) {
   return (
     <article className="grid grid-cols-6 gap-2 bg-white rounded-sm p-3 md:p-4 md:grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] md:gap-4">
       <img

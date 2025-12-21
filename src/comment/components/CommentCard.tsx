@@ -8,23 +8,27 @@ import UserProfile from "./UserProfile";
 import ScoreControl from "./ScoreControl";
 import ActionControl from "./ActionControl";
 import CommentMessageControl from "./CommentMessageControl";
+import ReplyCommentControl from "./ReplyCommentControl";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data: Comment | TReply;
-  isCurrentUser: boolean;
   ref: React.Ref<HTMLDivElement>;
 }
 
-const CommentCard: React.FC<Props> = forwardRef(
-  ({ data, isCurrentUser, className }, ref) => {
-    const { dispatch } = useCommentsContext();
-    const { editComment, hasEdited } = useMessageCard(data);
-    const { createdAt, score, user, id } = data;
+const CommentCard: React.FC<Props> = forwardRef(({ data, className }, ref) => {
+  const {
+    dispatch,
+    state: { currentUser },
+  } = useCommentsContext();
+  const { editComment, hasEdited, hasReplied, replyComment } =
+    useMessageCard(data);
+  const { createdAt, score, user, id } = data;
+  const isCurrentUser = currentUser.username === user.username;
 
-    return (
+  return (
+    <div ref={ref} className={`flex flex-col gap-y-3 ${className || ""}`}>
       <article
-        ref={ref}
-        className={`grid grid-cols-12 gap-y-3 p-3 rounded-md bg-white text-grey-500 md:gap-x-3 md:p-4 ${className || ""}`}
+        className={`grid grid-cols-12 gap-y-3 p-3 rounded-md bg-white text-grey-500 md:gap-x-3 md:p-4`}
       >
         <header className="col-span-full flex items-center gap-x-3 md:row-start-1 md:col-start-2 md:col-span-8">
           <UserProfile user={user} isCurrentUser={isCurrentUser} />
@@ -57,10 +61,19 @@ const CommentCard: React.FC<Props> = forwardRef(
             dispatch({ type: CommentActionEnum.DELETE_COMMENT, payload: id })
           }
           onEdit={editComment}
+          onReply={replyComment}
         />
       </article>
-    );
-  }
-);
+
+      {hasReplied && (
+        <ReplyCommentControl
+          data={data}
+          replyComment={replyComment}
+          currentUser={currentUser}
+        />
+      )}
+    </div>
+  );
+});
 
 export default CommentCard;
