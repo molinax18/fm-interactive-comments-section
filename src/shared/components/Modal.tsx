@@ -15,7 +15,6 @@ export default function Modal({ ...props }: Props) {
       className="fixed inset-0 grid place-items-center w-screen bg-black/50"
     >
       <div
-        {...props}
         className={`bg-white w-[90%] p-4 rounded-lg ${props.className || ""}`}
         role="dialog"
         aria-modal="true"
