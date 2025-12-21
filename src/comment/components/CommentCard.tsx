@@ -3,7 +3,7 @@ import { CommentActionEnum } from "@/comment/type/commentActions.type";
 import { useMessageCard } from "@/comment/hooks/useMessageCard";
 import { formatTimeComment } from "@/comment/utils/commentDate";
 import type { Comment, Reply as TReply } from "@/comment/type/comment.type";
-import type { HTMLAttributes } from "react";
+import { type HTMLAttributes, forwardRef } from "react";
 import UserProfile from "./UserProfile";
 import ScoreControl from "./ScoreControl";
 import ActionControl from "./ActionControl";
@@ -12,16 +12,18 @@ import CommentMessageControl from "./CommentMessageControl";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   data: Comment | TReply;
   isCurrentUser: boolean;
+  ref: React.Ref<HTMLDivElement>;
 }
 
-export default function CommentCard({ data, isCurrentUser, className }: Props) {
-  const { dispatch } = useCommentsContext();
-  const { editComment, hasEdited } = useMessageCard(data);
-  const { createdAt, score, user, id } = data;
+const CommentCard: React.FC<Props> = forwardRef(
+  ({ data, isCurrentUser, className }, ref) => {
+    const { dispatch } = useCommentsContext();
+    const { editComment, hasEdited } = useMessageCard(data);
+    const { createdAt, score, user, id } = data;
 
-  return (
-    <>
+    return (
       <article
+        ref={ref}
         className={`grid grid-cols-12 gap-y-3 p-3 rounded-md bg-white text-grey-500 md:gap-x-3 md:p-4 ${className || ""}`}
       >
         <header className="col-span-full flex items-center gap-x-3 md:row-start-1 md:col-start-2 md:col-span-8">
@@ -57,6 +59,8 @@ export default function CommentCard({ data, isCurrentUser, className }: Props) {
           onEdit={editComment}
         />
       </article>
-    </>
-  );
-}
+    );
+  }
+);
+
+export default CommentCard;
