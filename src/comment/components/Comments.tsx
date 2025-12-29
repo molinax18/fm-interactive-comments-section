@@ -1,17 +1,18 @@
+import type { FormEvent } from "react";
 import { useCommentsContext } from "@/comment/contexts/CommentsContext";
 import { AnimatePresence, motion } from "motion/react";
-import { useMessageComment } from "../hooks/useMessageComment";
-import { CommentActionEnum } from "../type/commentActions.type";
+import { useMessageComment } from "@/comment/hooks/useMessageComment";
+import { CommentActionEnum } from "@/comment/type/commentActions.type";
 import { Fragment } from "react/jsx-runtime";
-import type { FormEvent } from "react";
 import CommentCard from "./CommentCard";
-import AddComment from "./AddComment";
+import MessageComment from "./MessageComment";
+import MessageForm from "./MessageForm";
+import Button from "@/shared/components/Button";
 
 const MotionCommentCard = motion.create(CommentCard);
 
 export default function Comments() {
-  const { state } = useCommentsContext();
-  const { dispatch } = useCommentsContext();
+  const { state, dispatch } = useCommentsContext();
   const { message, setMessage, onChange } = useMessageComment();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -50,12 +51,33 @@ export default function Comments() {
           );
         })}
 
-        <AddComment
+        <MessageComment
           currentUser={state.currentUser}
-          onSubmit={onSubmit}
-          message={message}
-          onChange={onChange}
-        />
+          className="grid grid-cols-6 gap-2 bg-white rounded-sm p-3 md:p-4 md:grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] md:gap-4"
+        >
+          <MessageForm
+            id="addMessage"
+            message={message}
+            onChange={onChange}
+            onSubmit={onSubmit}
+            className="row-start-1 col-start-1 col-span-full md:col-start-2 md:col-span-4"
+          >
+            <textarea
+              className="h-20 w-full text-area"
+              placeholder="Add a comment..."
+              value={message}
+              onChange={onChange}
+            />
+          </MessageForm>
+
+          <Button
+            className="col-start-5 col-span-full p-3 md:row-start-1 md:self-start btn-fill md:col-start-6"
+            form="addMessage"
+            disabled={!!!message}
+          >
+            Send
+          </Button>
+        </MessageComment>
       </AnimatePresence>
     </section>
   );

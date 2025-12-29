@@ -1,39 +1,31 @@
-import { useCommentsContext } from "@/comment/contexts/CommentsContext";
 import { useMessageComment } from "@/comment/hooks/useMessageComment";
-import { useMessageCard } from "@/comment/hooks/useMessageCard";
-import { CommentActionEnum } from "@/comment/type/commentActions.type";
+import { useMessageContent } from "@/comment/hooks/useMessageContent";
 import type { Comment, Reply } from "@/comment/type/comment.type";
 import type { FormEvent, HTMLAttributes } from "react";
 import Button from "@/shared/components/Button";
 
 interface Props extends HTMLAttributes<HTMLFormElement> {
   hasEdited: boolean;
-  editComment: () => void;
+  toggleEdited: () => void;
+  editComment: (data: { id: string; content: string }) => void;
   data: Comment | Reply;
 }
 
 export default function CommentMessageControl({
   hasEdited,
+  toggleEdited,
   editComment,
   data,
   className,
 }: Props) {
-  const { dispatch } = useCommentsContext();
   const { message, onChange } = useMessageComment(data.content);
-  const { renderMessage } = useMessageCard(data);
+  const { renderMessage } = useMessageContent(data);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch({
-      type: CommentActionEnum.EDIT_COMMENT,
-      payload: {
-        id: data.id,
-        content: message,
-      },
-    });
-
-    editComment();
+    editComment({ id: data.id, content: message });
+    toggleEdited();
   };
 
   return hasEdited ? (
